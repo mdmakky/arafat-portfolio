@@ -31,8 +31,8 @@ body {
 :focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 4px; }
 a { color: inherit; }
 h2 {
-  font: 700 15px var(--sans); letter-spacing: .06em; text-transform: uppercase;
-  color: var(--accent); margin: 0 0 26px;
+  font: 800 clamp(24px, 2.4vw, 28px)/1.2 var(--sans); letter-spacing: -.02em;
+  color: var(--accent); margin: 0 0 20px;
 }
 .w {
   max-width: 1080px; margin: 0 auto;
