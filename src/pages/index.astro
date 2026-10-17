@@ -1,11 +1,31 @@
 ---
 import Base from '../layouts/Base.astro';
 import DeskScene from '../components/DeskScene.astro';
+import Projects from '../components/Projects.astro';
 ---
 <Base
   title="Md. Arafatuzzaman · Backend & full-stack developer"
   description="Arafat is a backend and full-stack developer from Jashore, Bangladesh. Rivo, Meal Bazar, Tong and Mentora AI."
 >
   <DeskScene />
-  <main class="w" id="top"></main>
+  <main class="w" id="top">
+    <div class="intro">
+      <h1>Hey, I'm Arafat.<br />I build <span class="spk">backends that ship</span>.</h1>
+      <p>I'm a backend and full-stack developer from Jashore, Bangladesh. I like turning everyday problems into small, reliable apps: tracking money, splitting a mess's bazar, chatting in real time, studying smarter. Most of them speak English and <span class="bn" lang="bn">বাংলা</span>.</p>
+    </div>
+    <div class="cols">
+      <Projects />
+    </div>
+  </main>
 </Base>
+
+<style>
+  main { padding-block: 8px 80px; }
+  .intro { max-width: 640px; margin: 8px 0 64px; }
+  h1 { font: 800 clamp(36px, 5.4vw, 56px)/1.08 var(--sans); letter-spacing: -.03em; margin: 0 0 18px; text-wrap: balance; }
+  .intro p { color: var(--soft); font-size: 19px; margin: 0; max-width: 58ch; }
+  .bn { font-family: var(--bangla); font-weight: 600; color: var(--accent); }
+  .spk { position: relative; white-space: nowrap; }
+  .cols { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 90px); }
+  @media (max-width: 800px) { .cols { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,28 @@
+---
+import { projects } from '../data/site';
+---
+<div id="work">
+  <h2>Things I've built</h2>
+  {projects.map((p) => (
+    <article>
+      <h3><a href={p.url} target="_blank" rel="noopener">{p.name}</a></h3>
+      <p class="sub">{p.tagline}</p>
+      <p set:html={p.body} />
+      <a class="more" href={p.url} target="_blank" rel="noopener">
+        {p.cta}
+        <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
+      </a>
+    </article>
+  ))}
+</div>
+
+<style>
+  article { margin-bottom: 48px; }
+  h3 { font: 700 22px/1.3 var(--sans); margin: 0; letter-spacing: -.01em; }
+  h3 a { text-decoration: none; }
+  h3 a:hover { color: var(--accent2); }
+  .sub { color: var(--accent2); font-weight: 500; margin: 2px 0 10px; font-size: 16px; }
+  p { color: var(--soft); margin: 0 0 12px; max-width: 62ch; }
+  p :global(code) { font: 500 .85em var(--mono); background: var(--pill); border: 1px solid var(--pillb); border-radius: 5px; padding: 1px 6px; }
+  .more { font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+</style>
