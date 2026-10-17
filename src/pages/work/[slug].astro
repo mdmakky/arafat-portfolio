@@ -23,7 +23,7 @@ const arrow = '<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d
       {p.repo && p.repo !== p.url && <a class="btn ghost" href={p.repo} target="_blank" rel="noopener">Source code <Fragment set:html={arrow} /></a>}
     </div>
 
-    {p.image && <img class="shot" src={p.image} alt={`The ${p.name} website home page`} width="1280" height="800" />}
+    {p.image && <img class="shot" src={p.image} alt={`The ${p.name} website home page`} width="1280" height={p.slug === "meal-bazar" ? 590 : 800} />}
 
     <div class="grid">
       <div>

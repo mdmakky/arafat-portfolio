@@ -26,3 +26,4 @@ pnpm-debug.log*
 # design scratch
 .impeccable/*.png
 .impeccable/*.webp
+.impeccable/questions/
