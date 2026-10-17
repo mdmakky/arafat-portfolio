@@ -1,0 +1,52 @@
+---
+import { stack, milestones, email, links } from '../data/site';
+---
+<aside>
+  <section>
+    <h2>Right now</h2>
+    <div class="now"><span class="dot" aria-hidden="true"></span><b>Open to work.</b> Looking for Junior SWE and backend roles, and happy to take on freelance app builds.</div>
+  </section>
+
+  <section id="stack">
+    <h2>What I use</h2>
+    <ul class="pills">{stack.map((s) => <li>{s}</li>)}</ul>
+  </section>
+
+  <section>
+    <h2>Along the way</h2>
+    <ul class="list">
+      {milestones.map((m) => (
+        <li><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg><span>{m}</span></li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Say hello</h2>
+    <ul class="list">
+      <li><a href={`mailto:${email}`}><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg><span>{email}</span></a></li>
+      {links.map((l) => (
+        <li><a href={l.url} target="_blank" rel="noopener"><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg><span>{l.label}</span></a></li>
+      ))}
+    </ul>
+  </section>
+</aside>
+
+<style>
+  section { margin-bottom: 52px; }
+  .now { background: var(--pill); border: 1px solid var(--pillb); border-radius: 14px; padding: 18px 20px; color: var(--soft); font-size: 16px; }
+  .now b { color: var(--fg); }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #22c55e; margin-right: 8px; animation: ping 2s infinite; }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 #22c55e88; } 70%, 100% { box-shadow: 0 0 0 8px #22c55e00; } }
+  ul { list-style: none; margin: 0; padding: 0; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pills li { font-size: 14px; font-weight: 500; padding: 4px 12px; border-radius: 8px; background: var(--pill); border: 1px solid var(--pillb); transition: transform .45s var(--spring); }
+  .pills li:hover { transform: translateY(-3px) rotate(-2deg); }
+  .list { display: grid; gap: 14px; font-weight: 600; }
+  .list li, .list a { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; }
+  .list li:has(a) { display: block; }
+  .list a { text-decoration: none; }
+  .list a:hover span { color: var(--accent2); }
+  .list .arrow { margin-top: 5px; color: var(--mute); }
+  .list a .arrow { color: currentColor; }
+</style>
