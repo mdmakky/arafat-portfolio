@@ -1,0 +1,39 @@
+---
+import '../styles/global.css';
+
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Hind+Siliguri:wght@600&family=JetBrains+Mono:wght@500&display=swap" />
+    <!-- set the theme before first paint so night visitors never see a white flash -->
+    <script is:inline>
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+  </head>
+  <body>
+    <!--
+THESIS: A developer's desk at home in Bangladesh (laptop, cha, khata, lamp, window) is the whole identity; the page below stays calm and content-first like joshwcomeau.com. Refuses the loud dev-portfolio hero.
+OWN-WORLD: Soft wall blue by day, ink night; warm wood desk; Figtree with Hind Siliguri for বাংলা; pink headings, blue links, pill tags, spring-eased hovers.
+STORY: Visitor sees the desk, reads "I build backends that ship", scans shipped projects, sees he is open to work, then emails.
+FIRST VIEWPORT: Full-width illustrated desk scene with nav on top; intro headline and paragraph below; projects + sidebar start just under.
+FORM: User-chosen desk concept after Scoreboard and hills rounds; seed key 0f92213c.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <slot />
+  </body>
+</html>

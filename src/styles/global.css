@@ -1,0 +1,49 @@
+:root {
+  --bg: #fbfaf7; --fg: #1d2433; --soft: #4a5468; --mute: #6b7487;
+  --accent: #d6336c; --accent2: #2f6fde; --pill: #f0eee8; --pillb: #e2dfd6;
+  --sky1: #8fd0ff; --sky2: #d8f0ff; --far: #3f7d52; --near: #2d3a4a; --steam: #8a96a8;
+  --wall1: #e4ecf4; --wall2: #d3dfeb; --frame: #ffffff; --wood: #c48a57; --wood2: #a8703f;
+  --paper: #fffdf6; --rule: #9fc3e6; --bulb: #fff; --glassline: #8a96a8; --navink: #13213a;
+  --beam: 0; --stars: 0; --sun: #ffd34d;
+  --spring: linear(0,.009,.035 2.1%,.141,.281 6.7%,.723 12.9%,.938 16.7%,1.017,1.077,1.121 22%,1.149 24.3%,1.159,1.163,1.161,1.154 29.9%,1.129 32.8%,1.051 39.6%,1.017 43.1%,.991,.977 51%,.974 53.8%,.975 57.1%,.997 69.8%,1.003 76.9%,1);
+  --sans: 'Figtree', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --bangla: 'Hind Siliguri', 'Figtree', sans-serif;
+}
+/* night palette: written once, applied by OS preference unless the visitor picked light */
+:root[data-theme="dark"] {
+  --bg: #0e1015; --fg: #eef0f5; --soft: #c3c8d4; --mute: #8d94a5;
+  --accent: #ff5c93; --accent2: #7fb0ff; --pill: #181b22; --pillb: #2a2f3a;
+  --sky1: #0b1a2b; --sky2: #1d3a55; --far: #0a131d; --near: #05080d; --steam: #ffffff55;
+  --wall1: #141b28; --wall2: #0f1520; --frame: #2a3446; --wood: #5a3c26; --wood2: #3f2a1b;
+  --paper: #d9d2c0; --rule: #6b7f99; --bulb: #ffe7a8; --glassline: #c3c8d4; --navink: #e9eef8;
+  --beam: 1; --stars: 1; --sun: #f4f1e1;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 17px/1.65 var(--sans);
+  transition: background .4s, color .4s;
+}
+::selection { background: var(--accent); color: #fff; }
+:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 4px; }
+a { color: inherit; }
+h2 {
+  font: 700 15px var(--sans); letter-spacing: .06em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 26px;
+}
+.w {
+  max-width: 1080px; margin: 0 auto;
+  padding-inline: max(20px, env(safe-area-inset-left, 0px)) max(20px, env(safe-area-inset-right, 0px));
+}
+.arrow {
+  width: 16px; height: 16px; flex: none; stroke: currentColor; fill: none; stroke-width: 2.2;
+  stroke-linecap: round; stroke-linejoin: round; transition: transform .5s var(--spring);
+}
+a:hover > .arrow { transform: translateX(5px); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
