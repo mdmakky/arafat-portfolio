@@ -4,7 +4,7 @@ export const projects = [
   {
     name: 'Rivo',
     tagline: 'Know where your money went',
-    body: 'An offline money tracker for cash, bank, bKash and Nagad. Type <code>tea 20</code> and it files a food expense for ৳20. Works in English and Bangla.',
+    body: 'An offline money tracker for cash, bank, bKash and Nagad. Type <code>tea 20</code> and it files a food expense for <span lang="bn">৳</span>20. Works in English and Bangla.',
     url: 'https://rivo-navy.vercel.app',
     cta: 'See it live',
   },
