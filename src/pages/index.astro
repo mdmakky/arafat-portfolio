@@ -19,7 +19,25 @@ import Sidebar from '../components/Sidebar.astro';
       <Sidebar />
     </div>
   </main>
+  <footer class="w"><span>© 2026 Md. Arafatuzzaman</span><span>Made in Jashore with a lot of cha</span></footer>
 </Base>
+
+<script>
+  // Sparkles around the headline phrase; skipped entirely for reduced motion.
+  const spk = document.querySelector('.spk');
+  if (spk && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(() => {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 160 160');
+      s.setAttribute('aria-hidden', 'true');
+      s.innerHTML = '<path d="M80 0C80 0 84 70 160 80 84 90 80 160 80 160S76 90 0 80C76 70 80 0 80 0Z"/>';
+      const size = 8 + Math.random() * 10;
+      Object.assign(s.style, { left: `${Math.random() * 100}%`, top: `${Math.random() * 90 - 20}%`, width: `${size}px`, height: `${size}px` });
+      spk.appendChild(s);
+      setTimeout(() => s.remove(), 900);
+    }, 450);
+  }
+</script>
 
 <style>
   main { padding-block: 8px 80px; }
@@ -28,6 +46,9 @@ import Sidebar from '../components/Sidebar.astro';
   .intro p { color: var(--soft); font-size: 19px; margin: 0; max-width: 58ch; }
   .bn { font-family: var(--bangla); font-weight: 600; color: var(--accent); }
   .spk { position: relative; white-space: nowrap; }
+  .spk :global(svg) { position: absolute; fill: #f7b500; pointer-events: none; animation: twinkle .9s ease forwards; }
+  @keyframes twinkle { 0% { transform: scale(0) rotate(0); } 50% { transform: scale(1) rotate(90deg); } 100% { transform: scale(0) rotate(180deg); } }
+  footer { border-top: 1px solid var(--pillb); padding-block: 28px 40px; color: var(--mute); font-size: 15px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   .cols { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 90px); }
   @media (max-width: 800px) { .cols { grid-template-columns: 1fr; } }
 </style>
