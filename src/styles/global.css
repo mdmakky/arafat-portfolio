@@ -28,7 +28,7 @@ body {
   transition: background .4s, color .4s;
 }
 ::selection { background: var(--accent); color: #fff; }
-:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 4px; }
+:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 3px; }
 a { color: inherit; }
 h2 {
   font: 800 clamp(24px, 2.4vw, 28px)/1.2 var(--sans); letter-spacing: -.02em;
