@@ -1,0 +1,63 @@
+{
+  "title": "Arafat-er portfolio: design world choose koro (round 2)",
+  "question": "Notun roll e eshechhe 'Ludo Board'. Eta rakho, ekta alternate nao, ba abar re-roll koro.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Ludo Board",
+      "kicker": "THE ROLL",
+      "lineage": "The cardboard Ludo board every Bangladeshi childhood played on",
+      "thesis": "Roll the dice and your token walks to a project: four home yards, four shipped apps, the centre triangle is 'let's talk'.",
+      "palette": ["#e5322d", "#1f9d55", "#f7c51e", "#2468d8", "#ffffff", "#141414"],
+      "materials": ["printed cardboard board", "glossy plastic tokens", "a chunky white die", "safe-square stars"],
+      "viewport": "A big Ludo board as hero: Rivo red yard, Meal Bazar green, Tong yellow, Mentora blue; your name across the centre; a die you can click to roll.",
+      "risk": "Must keep a plain project list beside the board so recruiters never have to play to read."
+    },
+    {
+      "id": "challenger-dubois",
+      "label": "Data Portrait",
+      "lineage": "W.E.B. Du Bois 1900 hand-inked data portraits",
+      "thesis": "Your GitHub year, stack and projects drawn as bold hand-inked spirals and bars.",
+      "palette": ["#efe3cc", "#c8102e", "#e8b10f", "#0f6b4a", "#111111"],
+      "materials": ["flat gouache color", "hand-lettered captions", "ink spirals"],
+      "viewport": "A crimson spiral of 797 contributions beside bars of languages, captions in hand lettering.",
+      "risk": "Ground is cream; needs the saturated colors to carry it.",
+      "case": "Fuses well: real data you have, and it shows backend/data depth with a strong personality.",
+      "hero": "https://impeccable.style/worlds/cards/dubois-data-portraits-hero.webp"
+    },
+    {
+      "id": "challenger-crouwel",
+      "label": "Grid Specimen",
+      "lineage": "Wim Crouwel gridded type posters",
+      "thesis": "Your name built cell by cell on a visible grid, like code assembling a system.",
+      "palette": ["#ffffff", "#1a1aff", "#111111", "#ff3b1f"],
+      "materials": ["graph-paper hairlines", "modular letterforms", "one accent plane"],
+      "viewport": "Giant ARAFAT assembled from grid cells that fill in on load; projects sit in the same grid.",
+      "risk": "Clever and bold, but cooler and less 'friendly' than Josh.",
+      "case": "Fuses fairly: strong identity, but less warm.",
+      "hero": "https://impeccable.style/worlds/cards/crouwel-grid-specimen-hero.webp"
+    },
+    {
+      "id": "challenger-segment",
+      "label": "Scoreboard",
+      "lineage": "Seven-segment clocks, scoreboards and price totems",
+      "thesis": "Your stats as a glowing scoreboard: repos, commits, apps shipped, all in LED digits.",
+      "palette": ["#111111", "#ff3b2f", "#ffb000", "#39d353"],
+      "materials": ["LED segments", "ghost unlit cells", "matte black panel"],
+      "viewport": "A scoreboard header flipping digits for 797 commits and 4 apps, project list below.",
+      "risk": "Dark and neon, close to the generic dev look you rejected.",
+      "case": "Fuses poorly: playful moment but drifts toward the dark-dev cliché.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-seven-segment-alarm-clock-hero.webp"
+    }
+  ],
+  "reroll": true,
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A clean developer portfolio done at full craft: hero, projects grid, about, contact.",
+    "palette": ["#ffffff", "#111111", "#4f6bff"],
+    "viewport": "Name and role headline, a project card grid, then about and contact.",
+    "risk": "Safe and familiar; this is the genre you called generic."
+  },
+  "steer": true
+}

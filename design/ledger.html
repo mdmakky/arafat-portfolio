@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Md. Arafatuzzaman — Full-stack & Flutter Engineer</title>
+<meta name="description" content="Product-minded full-stack and Flutter engineer in Bangladesh. Rivo, Meal Bazar, Tong, Mentora.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+:root{--p:#eceae4;--ink:#16211b;--gr:#1f4a37;--co:#e8573e;--mute:#16211bb3;--line:#16211b26}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--p);color:var(--ink);font:16px/1.55 'Hanken Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gr);outline-offset:3px}
+.w{max-width:1100px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:24px}
+header b{font-weight:600}
+header nav{display:flex;gap:24px;font-size:15px}
+header nav a{text-decoration:none}header nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.hero{padding-block:clamp(48px,10vw,110px) clamp(48px,8vw,84px)}
+h1{font:500 clamp(40px,7vw,88px)/1.02 'Hanken Grotesk',sans-serif;letter-spacing:-.04em;margin:0 0 24px;max-width:15ch;text-wrap:balance}
+h1 span{color:var(--gr)}
+.lead{font-size:clamp(20px,2.4vw,25px);max-width:48ch;color:var(--mute);margin:0 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:500;font-size:15px;border:1px solid var(--ink)}
+.btn.f{background:var(--ink);color:var(--p)}
+.btn:hover{background:var(--gr);border-color:var(--gr);color:var(--p)}
+.h{font:500 12px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.09em;color:var(--mute);border-bottom:1px solid var(--ink);padding-bottom:10px;display:flex;justify-content:space-between;gap:12px}
+.r{display:grid;grid-template-columns:1.1fr 2fr 1.5fr auto;gap:8px 20px;padding:24px 0;border-bottom:1px solid var(--line);align-items:baseline;text-decoration:none;transition:transform .2s}
+.r:hover{transform:translateX(10px)}
+.r b{font:600 clamp(22px,2.6vw,28px)/1.1 'Hanken Grotesk',sans-serif;letter-spacing:-.02em}
+.r:hover b{color:var(--gr)}
+.r .m{font:400 13px 'DM Mono',monospace;color:var(--mute)}
+.r .a{color:var(--co);font-size:20px}
+section{padding-block:clamp(40px,7vw,72px)}
+.about{display:grid;grid-template-columns:1fr 2fr;gap:24px 48px}
+.about h2{font:500 12px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.09em;color:var(--mute);margin:0}
+.about p{margin:0 0 16px;max-width:56ch}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.tags span{border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:14px}
+.contact h2{font:500 clamp(34px,5.5vw,64px)/1.05 'Hanken Grotesk',sans-serif;letter-spacing:-.035em;margin:0 0 20px}
+footer{padding-block:28px 40px;border-top:1px solid var(--ink);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--mute)}
+@media(max-width:760px){.r{grid-template-columns:1fr auto}.r .d,.r .m{grid-column:1/-1}.about{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.r{transition:none}}
+</style>
+</head>
+<body>
+<div class="w">
+<header><b>Md. Arafatuzzaman</b><nav><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav></header>
+
+<main>
+<div class="hero">
+<h1>Calm software for <span>everyday money</span> and shared life.</h1>
+<p class="lead">Product-minded full-stack and Flutter engineer from Bangladesh. I build apps people use every day, in English and বাংলা.</p>
+<div class="cta"><a class="btn f" href="#work">See my work</a><a class="btn" href="#contact">Get in touch</a></div>
+</div>
+
+<section id="work" style="padding-top:0">
+<div class="h"><span>Selected work</span><span>4 shipped</span></div>
+<a class="r" href="https://rivo-navy.vercel.app" target="_blank" rel="noopener"><b>Rivo</b><span class="d">Personal finance tracker. Know where your money goes.</span><span class="m">Flutter · Supabase</span><span class="a">↗</span></a>
+<a class="r" href="https://meal-bazar-ai.vercel.app" target="_blank" rel="noopener"><b>Meal Bazar</b><span class="d">Run a whole mess from your phone: meals, bazar, shared expenses and month-end settlement.</span><span class="m">Flutter · Supabase</span><span class="a">↗</span></a>
+<a class="r" href="https://tongchat.app" target="_blank" rel="noopener"><b>Tong</b><span class="d">Real-time messaging with group chats, media sharing and OTP login.</span><span class="m">Node · Socket.io · Postgres · Mongo</span><span class="a">↗</span></a>
+<a class="r" href="https://github.com/mdmakky/Mentora-AI" target="_blank" rel="noopener"><b>Mentora</b><span class="d">AI study assistant that reads your PDFs and helps you prepare for exams.</span><span class="m">Node · RAG · LLM</span><span class="a">↗</span></a>
+</section>
+
+<section id="about" class="about">
+<h2>About</h2>
+<div>
+<p>I'm Arafat. I build full-stack web and Flutter apps, and I like turning messy everyday problems into simple tools: tracking spending, splitting a mess's bazar, chatting in real time, studying faster.</p>
+<p>I care about clear numbers, small interfaces and things that keep working after launch.</p>
+<div class="tags"><span>Flutter</span><span>Node.js</span><span>Supabase</span><span>PostgreSQL</span><span>MongoDB</span><span>Socket.io</span><span>Python</span><span>AI / RAG</span></div>
+</div>
+</section>
+
+<section id="contact" class="contact" style="border-top:1px solid var(--ink)">
+<h2>Let's build something.</h2>
+<div class="cta"><a class="btn f" href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a><a class="btn" href="https://github.com/mdmakky" target="_blank" rel="noopener">GitHub</a></div>
+</section>
+</main>
+
+<footer><span>© 2026 Md. Arafatuzzaman</span><span>Built in Bangladesh</span></footer>
+</div>
+</body>
+</html>

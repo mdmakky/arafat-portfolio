@@ -1,0 +1,179 @@
+<title>Arafat Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Hind+Siliguri:wght@600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a landscape of rolling hills as the hero band, then a calm two-column reading layout: projects on the left, a sidebar on the right. Day and night themes. */
+:root{--bg:#fbfaf7;--fg:#1d2433;--soft:#4a5468;--mute:#6b7487;--accent:#d6336c;--accent2:#2f6fde;--pill:#f0eee8;--pillb:#e2dfd6;
+--sky1:#8fd0ff;--sky2:#d8f0ff;--far:#3f7d52;--near:#2d3a4a;--steam:#8a96a8;--wall1:#e4ecf4;--wall2:#d3dfeb;--frame:#ffffff;--wood:#c48a57;--wood2:#a8703f;--paper:#fffdf6;--rule:#9fc3e6;--bulb:#fff;--glassline:#8a96a8;--beam:0;--stars:0;--sun:#ffd34d;
+--spring:linear(0,.009,.035 2.1%,.141,.281 6.7%,.723 12.9%,.938 16.7%,1.017,1.077,1.121 22%,1.149 24.3%,1.159,1.163,1.161,1.154 29.9%,1.129 32.8%,1.051 39.6%,1.017 43.1%,.991,.977 51%,.974 53.8%,.975 57.1%,.997 69.8%,1.003 76.9%,1)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1015;--fg:#eef0f5;--soft:#c3c8d4;--mute:#8d94a5;--accent:#ff5c93;--accent2:#7fb0ff;--pill:#181b22;--pillb:#2a2f3a;--sky1:#0b1a2b;--sky2:#1d3a55;--far:#0a131d;--near:#05080d;--steam:#ffffff55;--wall1:#141b28;--wall2:#0f1520;--frame:#2a3446;--wood:#5a3c26;--wood2:#3f2a1b;--paper:#d9d2c0;--rule:#6b7f99;--bulb:#ffe7a8;--glassline:#c3c8d4;--beam:1;--stars:1;--sun:#f4f1e1;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1015;--fg:#eef0f5;--soft:#c3c8d4;--mute:#8d94a5;--accent:#ff5c93;--accent2:#7fb0ff;--pill:#181b22;--pillb:#2a2f3a;--sky1:#0b1a2b;--sky2:#1d3a55;--far:#0a131d;--near:#05080d;--steam:#ffffff55;--wall1:#141b28;--wall2:#0f1520;--frame:#2a3446;--wood:#5a3c26;--wood2:#3f2a1b;--paper:#d9d2c0;--rule:#6b7f99;--bulb:#ffe7a8;--glassline:#c3c8d4;--beam:1;--stars:1;--sun:#f4f1e1;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:17px/1.65 'Figtree',system-ui,sans-serif;margin:0;transition:background .4s}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent2);outline-offset:3px;border-radius:4px}
+a{color:inherit}
+.w{max-width:1080px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+
+.scene{position:relative;height:clamp(240px,22.2vw,420px);background:linear-gradient(var(--wall1),var(--wall2));overflow:hidden}
+.beam{opacity:var(--beam);transition:opacity .5s}.lamp,.cha{cursor:pointer;outline:none}.lamp:focus-visible path:last-of-type,.cha:focus-visible path{stroke:var(--accent2);stroke-width:3}
+.tea{transition:transform .6s var(--spring)}.code path{stroke-dasharray:1;stroke-dashoffset:1;animation:type 7s ease infinite}.code path:nth-child(2){animation-delay:.5s}.code path:nth-child(3){animation-delay:1s}.code path:nth-child(4){animation-delay:1.5s}.code path:nth-child(5){animation-delay:2s}.code path:nth-child(6){animation-delay:2.5s}.code path:nth-child(7){animation-delay:3s}
+@keyframes type{0%{stroke-dashoffset:1}12%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:0;opacity:0}}
+.caret{animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.code path{stroke-dashoffset:0}}
+.scene svg.land{position:absolute;inset:auto 0 -1px 0;width:100%;height:100%}
+.boat{animation:bob 4s ease-in-out infinite;transform-origin:700px 210px}@keyframes bob{50%{transform:translateY(-4px) rotate(-1deg)}}
+.rip{animation:rp 5s ease-in-out infinite}@keyframes rp{50%{transform:translateX(18px)}}
+.cloth>*{transform-box:fill-box;transform-origin:top;animation:sw 3s ease-in-out infinite}.cloth>*:nth-child(2){animation-delay:-1s}@keyframes sw{50%{transform:rotate(6deg)}}
+.kite{animation:kt 6s ease-in-out infinite}@keyframes kt{50%{transform:translate(-14px,10px) rotate(-6deg)}}
+.steam path{animation:st 2.4s ease-in-out infinite;opacity:.8}.steam path+path{animation-delay:-1.2s}@keyframes st{0%{transform:translateY(6px);opacity:0}40%{opacity:.9}100%{transform:translateY(-14px);opacity:0}}
+.scene .stars{position:absolute;inset:0;opacity:var(--stars);transition:opacity .6s;background-image:radial-gradient(1.5px 1.5px at 12% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 12%,#fff,transparent),radial-gradient(1.5px 1.5px at 52% 26%,#fff,transparent),radial-gradient(1px 1px at 68% 10%,#fff,transparent),radial-gradient(1.5px 1.5px at 84% 22%,#fff,transparent),radial-gradient(1px 1px at 92% 8%,#fff,transparent),radial-gradient(1px 1px at 40% 34%,#fff,transparent)}
+.scene .orb-old{position:absolute;right:14%;top:18%;width:54px;height:54px;border-radius:50%;background:var(--sun);box-shadow:0 0 40px var(--sun);transition:background .5s,box-shadow .5s}
+nav.top{position:absolute;inset:0 0 auto;z-index:2}
+nav.top .w{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.logo{font:800 22px 'Figtree';text-decoration:none;color:#13213a;display:inline-flex;align-items:center;gap:2px}
+.logo span{color:var(--accent)}
+nav.top ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-weight:600;font-size:16px;color:#13213a}
+nav.top a{text-decoration:none}
+nav.top a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+:root[data-theme="dark"] .logo,:root[data-theme="dark"] nav.top ul{color:#e9eef8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo,:root:not([data-theme="light"]) nav.top ul{color:#e9eef8}}
+.tog{all:unset;cursor:pointer;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:inherit;transition:transform .6s var(--spring)}
+.tog:hover{transform:rotate(25deg) scale(1.1)}
+.tog svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.navr{display:flex;align-items:center;gap:18px}
+
+main{padding-block:8px 80px}
+.intro{max-width:640px;margin:8px 0 64px}
+.intro h1{font:800 clamp(36px,5.4vw,56px)/1.08 'Figtree';letter-spacing:-.03em;margin:0 0 18px;text-wrap:balance}
+.intro h1 .bn{font-family:'Hind Siliguri';font-weight:600;color:var(--accent)}
+.intro p{color:var(--soft);font-size:19px;margin:0 0 14px;max-width:58ch}
+.wave{display:inline-block;transform-origin:70% 80%}
+.wave:hover{animation:wv .9s ease}
+@keyframes wv{20%,60%{transform:rotate(14deg)}40%,80%{transform:rotate(-8deg)}}
+.spk{position:relative;white-space:nowrap}
+.spk svg{position:absolute;width:12px;height:12px;fill:#f7b500;pointer-events:none;animation:tw .9s ease forwards}
+@keyframes tw{0%{transform:scale(0) rotate(0)}50%{transform:scale(1) rotate(90deg)}100%{transform:scale(0) rotate(180deg)}}
+
+.cols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(32px,6vw,90px)}
+h2{font:700 15px 'Figtree';letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 26px}
+.proj{margin-bottom:48px}
+.proj h3{font:700 22px/1.3 'Figtree';margin:0;letter-spacing:-.01em}
+.proj h3 a{text-decoration:none}
+.proj h3 a:hover{color:var(--accent2)}
+.proj .sub{color:var(--accent2);font-weight:500;margin:2px 0 10px;font-size:16px}
+.proj p{color:var(--soft);margin:0 0 12px;max-width:62ch}
+.proj code{font:500 .85em 'JetBrains Mono',monospace;background:var(--pill);border:1px solid var(--pillb);border-radius:5px;padding:1px 6px}
+.more{font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
+.more svg,.list svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s var(--spring)}
+.more:hover svg,.list a:hover svg{transform:translateX(5px)}
+aside section{margin-bottom:52px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills span{font-size:14px;font-weight:500;padding:4px 12px;border-radius:8px;background:var(--pill);border:1px solid var(--pillb);transition:transform .45s var(--spring)}
+.pills span:hover{transform:translateY(-3px) rotate(-2deg)}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.list a{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;text-decoration:none;font-weight:600}
+.list a svg{margin-top:5px}
+.list a:hover span{color:var(--accent2)}
+.now{background:var(--pill);border:1px solid var(--pillb);border-radius:14px;padding:18px 20px;color:var(--soft);font-size:16px}
+.now b{color:var(--fg)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:8px;box-shadow:0 0 0 0 #22c55e88;animation:pl 2s infinite}
+@keyframes pl{70%{box-shadow:0 0 0 8px #22c55e00}100%{box-shadow:0 0 0 0 #22c55e00}}
+footer{border-top:1px solid var(--pillb);padding-block:28px 40px;color:var(--mute);font-size:15px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:800px){.cols{grid-template-columns:1fr}nav.top ul{gap:16px;font-size:15px}.scene .orb-old{width:38px;height:38px}}
+@media(max-width:480px){nav.top ul li.hide{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="scene" aria-hidden="false">
+  <svg class="land" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" aria-hidden="false" role="img" aria-label="A desk with a laptop, a glass of cha, a notebook and a lamp by a window">
+    <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sky1)"/><stop offset="1" stop-color="var(--sky2)"/></linearGradient>
+      <linearGradient id="cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a" stop-opacity=".55"/><stop offset="1" stop-color="#ffd98a" stop-opacity="0"/></linearGradient>
+      <clipPath id="win"><rect x="1000" y="40" width="250" height="160" rx="4"/></clipPath></defs>
+    <g clip-path="url(#win)"><rect x="1000" y="40" width="250" height="160" fill="url(#sky)"/>
+      <g opacity="var(--stars)" fill="#fff"><circle cx="1030" cy="64" r="1.5"/><circle cx="1090" cy="56" r="1"/><circle cx="1150" cy="80" r="1.5"/><circle cx="1210" cy="60" r="1"/><circle cx="1060" cy="100" r="1"/></g>
+      <circle cx="1190" cy="86" r="18" fill="var(--sun)" class="orb2"/>
+      <g fill="var(--far)"><path d="M1060 200c4-40 8-70 6-96h6c2 26 0 56-4 96z"/><path d="M1068 106c-30-6-50 6-62 22 22-12 40-14 62-16zM1070 104c26-14 52-12 70 2-24-4-46-2-68 4zM1068 104c-10-24-30-34-50-34 18 8 32 20 44 38zM1072 104c12-22 30-30 52-28-20 6-36 16-48 32z"/><path d="M1000 200c40-24 90-30 140-20s80 6 110-6v26z"/></g></g>
+    <rect x="1000" y="40" width="250" height="160" rx="4" fill="none" stroke="var(--frame)" stroke-width="10"/><path d="M1125 40v160M1000 120h250" stroke="var(--frame)" stroke-width="6"/>
+    <rect x="990" y="198" width="270" height="10" rx="3" fill="var(--frame)"/>
+    <g><rect x="120" y="104" width="250" height="9" rx="3" fill="var(--wood)"/>
+      <rect x="140" y="58" width="16" height="46" rx="2" fill="#e5484d"/><rect x="158" y="64" width="14" height="40" rx="2" fill="#3e9fe0"/><rect x="174" y="54" width="18" height="50" rx="2" fill="#f5c542"/><rect x="194" y="66" width="12" height="38" rx="2" fill="#4caf7a"/><rect x="214" y="72" width="40" height="12" rx="2" fill="#a774e8" transform="rotate(-24 214 84)"/>
+      <path d="M318 104h34l-4-26h-26z" fill="#d07a4f"/><path d="M335 78c-2-16 2-28 0-38 6 10 10 22 6 38zM330 80c-10-8-14-18-12-26 6 6 10 14 12 26z" fill="#4caf7a"/></g>
+    <g class="lamp" id="lamp" role="button" tabindex="0" aria-label="Lamp: switch day and night">
+      <path class="beam" d="M402 126L340 246h190L452 126z" fill="url(#cone)"/>
+      <rect x="388" y="236" width="70" height="10" rx="5" fill="var(--near)"/><path d="M420 236l-8-70 46-44" stroke="var(--near)" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M432 108l46 18-14 22-44-22z" fill="var(--accent)"/><circle cx="442" cy="140" r="5" fill="var(--bulb)"/></g>
+    <rect x="0" y="246" width="1440" height="12" fill="var(--wood)"/><rect x="0" y="258" width="1440" height="26" fill="var(--wood2)"/>
+    <g><rect x="540" y="100" width="300" height="146" rx="12" fill="var(--near)"/><rect x="554" y="114" width="272" height="118" rx="5" fill="#0f1420"/>
+      <g class="code" stroke-linecap="round" stroke-width="6" fill="none"><path pathLength="1" d="M574 136h50" stroke="#ff5c93"/><path pathLength="1" d="M634 136h80" stroke="#7fb0ff"/><path pathLength="1" d="M594 156h110" stroke="#9fd88a"/><path pathLength="1" d="M594 176h56" stroke="#f5c542"/><path pathLength="1" d="M660 176h70" stroke="#7fb0ff"/><path pathLength="1" d="M594 196h86" stroke="#c9a7ff"/><path pathLength="1" d="M574 216h30" stroke="#ff5c93"/></g>
+      <rect class="caret" x="612" y="208" width="4" height="16" fill="#fff"/>
+      <path d="M500 246h380l-22-10H522z" fill="var(--near)"/></g>
+    <g class="cha" id="cha" role="button" tabindex="0" aria-label="Glass of cha: take a sip">
+      <g class="steam" stroke="var(--steam)" stroke-width="3" fill="none" stroke-linecap="round"><path d="M914 166c-8-12 8-18 0-30"/><path d="M932 166c-8-12 8-18 0-30"/></g>
+      <clipPath id="glass"><path d="M900 174h48l-6 72h-36z"/></clipPath>
+      <rect class="tea" clip-path="url(#glass)" x="896" y="182" width="56" height="70" fill="#c9852d"/>
+      <path d="M900 174h48l-6 72h-36z" fill="#ffffff22" stroke="var(--glassline)" stroke-width="2.5"/>
+      <ellipse cx="924" cy="248" rx="34" ry="4" fill="#00000022"/></g>
+    <g><path d="M980 244l20-22h128l-20 22z" fill="var(--paper)"/><path d="M1012 222l-20 22" stroke="#e5484d" stroke-width="2"/><path d="M1010 230h96M1004 237h96" stroke="var(--rule)" stroke-width="1.5"/>
+      <path d="M1060 226l50-12" stroke="var(--near)" stroke-width="5" stroke-linecap="round"/></g>
+    <g><path d="M1300 246h52l6-40h-64z" fill="#3e9fe0"/><path d="M1326 206c-4-30 10-52 30-62-14 18-20 38-24 62zM1322 206c-16-20-36-26-52-22 20 4 36 12 46 24zM1326 206c4-20 0-44-10-60 16 14 20 36 16 60z" fill="#4caf7a"/></g>
+    <rect y="284" width="1440" height="36" fill="var(--bg)"/>
+  </svg>
+  <nav class="top" aria-label="Main"><div class="w">
+    <a class="logo" href="#top">arafat<span>.</span></a>
+    <div class="navr"><ul><li><a href="#work">Work</a></li><li class="hide"><a href="#stack">Stack</a></li><li><a href="#contact">Contact</a></li></ul>
+    <button class="tog" id="tog" type="button" aria-label="Switch light and dark theme"><svg viewBox="0 0 24 24" id="ico"></svg></button></div>
+  </div></nav>
+</div>
+
+<main class="w" id="top">
+  <div class="intro">
+    <h1>Hey, I'm Arafat <span class="wave" aria-hidden="true">✌︎</span><br>I build <span class="spk" id="spk">backends that ship</span>.</h1>
+    <p>I'm a backend and full-stack developer from Jashore, Bangladesh. I like turning everyday problems into small, reliable apps: tracking money, splitting a mess's bazar, chatting in real time, studying smarter. Most of them speak English and <span class="bn" style="font-family:'Hind Siliguri';color:var(--accent);font-weight:600">বাংলা</span>.</p>
+  </div>
+
+  <div class="cols">
+    <div id="work">
+      <h2>Things I've built</h2>
+      <article class="proj"><h3><a href="https://rivo-navy.vercel.app" target="_blank" rel="noopener">Rivo</a></h3><p class="sub">Know where your money went</p><p>An offline money tracker for cash, bank, bKash and Nagad. Type <code>tea 20</code> and it files a food expense for ৳20. Works in English and Bangla.</p><a class="more" href="https://rivo-navy.vercel.app" target="_blank" rel="noopener">See it live <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+      <article class="proj"><h3><a href="https://meal-bazar.vercel.app" target="_blank" rel="noopener">Meal Bazar</a></h3><p class="sub">Run your whole mess from one phone</p><p>Meals, bazar, shared expenses and the month-end hisab, all settled automatically. Built with Flutter and Supabase for the shared houses students actually live in.</p><a class="more" href="https://meal-bazar.vercel.app" target="_blank" rel="noopener">See it live <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+      <article class="proj"><h3><a href="https://tongchat.app" target="_blank" rel="noopener">Tong</a></h3><p class="sub">Real-time chat, built from the socket up</p><p>Group chats, media sharing, OTP login and presence. Event-driven with Socket.io rooms, PostgreSQL plus MongoDB, and JWT refresh-token rotation.</p><a class="more" href="https://tongchat.app" target="_blank" rel="noopener">See it live <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+      <article class="proj"><h3><a href="https://github.com/mdmakky/Mentora-AI" target="_blank" rel="noopener">Mentora AI</a></h3><p class="sub">A study buddy that reads your PDFs</p><p>Upload your notes and ask questions. A RAG pipeline with FastAPI, LangChain and ChromaDB answers from your own material, with a React front-end.</p><a class="more" href="https://github.com/mdmakky/Mentora-AI" target="_blank" rel="noopener">Read the code <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+      <article class="proj"><h3><a href="https://share-reads.web.app" target="_blank" rel="noopener">Share-Reads</a></h3><p class="sub">Borrow books from people nearby</p><p>A team project for uploading, lending and reviewing books, with Node.js, MongoDB and Firebase.</p><a class="more" href="https://share-reads.web.app" target="_blank" rel="noopener">See it live <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+    </div>
+
+    <aside>
+      <section><h2>Right now</h2><div class="now"><span class="dot" aria-hidden="true"></span><b>Open to work.</b> Looking for Junior SWE and backend roles, and happy to take on freelance app builds. Recently a backend intern at Syftet Limited.</div></section>
+      <section id="stack"><h2>What I use</h2><div class="pills"><span>Node.js</span><span>Express</span><span>FastAPI</span><span>Django</span><span>PostgreSQL</span><span>MongoDB</span><span>Supabase</span><span>Socket.io</span><span>Flutter</span><span>React</span><span>LangChain</span><span>Docker</span><span>AWS</span></div></section>
+      <section><h2>Along the way</h2><ul class="list">
+        <li><a href="#top"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>B.Sc. CSE at JUST, Jashore</span></a></li>
+        <li><a href="#top"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>INNOVATEX 2025 hackathon finalist</span></a></li>
+        <li><a href="#top"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>Datathon KUET, 56 of 200</span></a></li>
+        <li><a href="#top"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>80-hour Machine Learning certification</span></a></li>
+      </ul></section>
+      <section id="contact"><h2>Say hello</h2><ul class="list">
+        <li><a href="mailto:makky.cse@gmail.com"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>makky.cse@gmail.com</span></a></li>
+        <li><a href="https://www.linkedin.com/in/md-amakky" target="_blank" rel="noopener"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>LinkedIn</span></a></li>
+        <li><a href="https://github.com/mdmakky" target="_blank" rel="noopener"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>GitHub</span></a></li>
+      </ul></section>
+    </aside>
+  </div>
+</main>
+
+<footer class="w"><span>© 2026 Md. Arafatuzzaman</span><span>Made in Jashore with a lot of cha</span></footer>
+
+<script>
+var root=document.documentElement,ico=document.getElementById('ico');
+var SUN='<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',MOON='<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>';
+function dark(){var t=root.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme:dark)').matches}
+function paint(){ico.innerHTML=dark()?SUN:MOON}
+paint();
+function flip(){root.setAttribute('data-theme',dark()?'light':'dark');paint()}
+document.getElementById('tog').onclick=flip;
+function act(el,fn){el.addEventListener('click',fn);el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();fn()}})}
+act(document.getElementById('lamp'),flip);
+var tea=document.querySelector('.tea'),sips=0;
+act(document.getElementById('cha'),function(){sips=(sips+1)%4;tea.style.transform='translateY('+(sips*16)+'px)'});
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,spk=document.getElementById('spk');
+if(!reduce)setInterval(function(){var s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 160 160');s.innerHTML='<path d="M80 0C80 0 84 70 160 80 84 90 80 160 80 160S76 90 0 80C76 70 80 0 80 0Z"/>';s.style.left=Math.random()*100+'%';s.style.top=(Math.random()*90-20)+'%';var z=8+Math.random()*10;s.style.width=s.style.height=z+'px';spk.appendChild(s);setTimeout(function(){s.remove()},900)},450);
+</script>

@@ -1,0 +1,210 @@
+<title>Arafat Scoreboard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap">
+<!--
+THESIS: The portfolio is a bank of seven/fourteen-segment displays; every fact about Arafat is a lit reading. Refuses the dark-dev hero + card grid by making each module a working instrument.
+OWN-WORLD: Matte black panel, LED red / amber / scoreboard green, unlit ghost segments always visible, thin bezel frames, silkscreen mono labels, Saira body.
+STORY: Visitor reads "ARAFAT / I BUILD BACKENDS THAT SHIP", sees live stats, scans four shipped modules, then contacts via the "NOW SERVING: YOU" queue display.
+FIRST VIEWPORT: Left: segment headline + one paragraph + two bezel buttons. Right: a price-totem stat column. Bottom: the four shipped modules.
+FORM: Seven-segment display family (challenger chosen by user), seed key 0f92213c.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+<style>
+:root{--bg:#0a0a0a;--panel:#111111;--bezel:#2a1714;--ghost:#1d1a1a;--red:#ff3b30;--amber:#ffb400;--green:#00ff66;--text:#f1ddd8;--mute:#a88a84;--line:#3a201c;
+--ui:'Saira',system-ui,sans-serif;--mono:'Martian Mono',ui-monospace,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+html{scrollbar-color:#4a2420 #0a0a0a}
+body{background:var(--bg);color:var(--text);font:16px/1.6 var(--ui);margin:0;background-image:radial-gradient(#ffffff06 1px,transparent 1px);background-size:4px 4px}
+::selection{background:var(--red);color:#000}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+a{color:inherit;text-underline-offset:4px;text-decoration-color:var(--red)}
+.w{max-width:1240px;margin:0 auto;padding-inline:max(18px,env(safe-area-inset-left,0px)) max(18px,env(safe-area-inset-right,0px))}
+.seg{display:block;height:auto;overflow:visible}
+.seg .off{stroke:var(--ghost)}
+.seg .on{stroke:var(--c,var(--red));filter:drop-shadow(0 0 3px var(--c,var(--red)))}
+.lbl{font:500 11px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--c,var(--red))}
+.bez{border:1px solid var(--line);border-radius:6px;background:linear-gradient(#141010,#0d0b0b);box-shadow:inset 0 1px 0 #ffffff08,0 12px 30px -12px #000}
+
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:16px;border-bottom:1px solid var(--line)}
+header nav{display:flex;gap:26px;flex-wrap:wrap}
+header nav a{text-decoration:none}
+header nav a:hover .lbl{color:var(--amber)}
+.status{display:flex;gap:14px;align-items:center}
+.led{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.btn{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border:1px solid var(--red);border-radius:5px;font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--red);transition:background .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,color .25s}
+.btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.btn:hover,.btn.on{background:#ff3b3014;box-shadow:0 0 0 1px var(--red),0 0 22px -4px var(--red)}
+.btn.on{background:var(--red);color:#120403}
+.btn.on:hover{background:#ff5a50}
+.btn:active{transform:translateY(1px)}
+.btn.sm{padding:7px 12px;font-size:10px;border-color:var(--line);color:var(--mute)}
+.btn.sm:hover{color:var(--amber);border-color:var(--amber);box-shadow:none;background:none}
+
+.hero{display:grid;grid-template-columns:1.25fr .85fr;gap:clamp(28px,5vw,64px);padding-block:clamp(40px,7vw,80px) 40px;align-items:center}
+.hero>*{min-width:0}
+.hl{display:grid;gap:clamp(10px,1.4vw,18px);margin:18px 0 26px}
+.hl .seg{width:100%}
+.lead{max-width:56ch;color:var(--text);opacity:.85;font-size:clamp(16px,1.4vw,18px);margin:0 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.totem{padding:22px 24px;display:grid;gap:6px}
+.row{display:grid;grid-template-columns:1fr auto;align-items:end;gap:14px;padding-block:14px;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.row .seg{height:clamp(54px,6vw,78px);width:auto}
+.row .unit{font:500 11px var(--mono);color:var(--c);letter-spacing:.1em;display:block;margin-top:6px}
+
+.strip{display:grid;grid-template-columns:260px repeat(4,1fr);gap:14px;padding-block:20px 72px;align-items:stretch}
+.strip>*{min-width:0}
+.strip .ttl{align-self:center}
+.mod{padding:16px;display:flex;flex-direction:column;gap:12px;text-decoration:none;transition:border-color .3s,box-shadow .3s}
+.mod .scr{background:#070606;border:1px solid #1e1412;border-radius:4px;padding:12px 10px}
+.mod .scr .seg{height:44px;width:auto;max-width:100%}
+.mod p{margin:0;font-size:14px;line-height:1.45;color:var(--text);opacity:.8}
+.mod .lbl{color:var(--mute)}
+.mod:hover,.mod:focus-visible{border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 0 28px -8px var(--c)}
+.mod:hover .lbl.t{color:var(--c)}
+
+section{padding-block:clamp(48px,7vw,88px);border-top:1px solid var(--line)}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap;margin-bottom:28px}
+.sh .seg{height:clamp(30px,3.4vw,44px);width:auto}
+.sh p{margin:0;color:var(--mute);max-width:44ch;font-size:15px}
+.keys{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.key{padding:12px;cursor:default}
+.key .seg{height:22px;width:auto;max-width:100%}
+.key .lbl{color:var(--mute);margin-top:8px;display:block}
+.key:hover{--c:var(--red)!important;border-color:var(--red)}
+
+.log{display:grid;gap:0}
+.ent{display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:center;padding-block:18px;border-bottom:1px solid var(--line)}
+.ent .seg{height:40px;width:auto}
+.ent b{font-weight:600;font-size:18px;display:block}
+.ent span{color:var(--mute);font-size:15px}
+
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);align-items:stretch}
+.contact>*{min-width:0}
+.queue{padding:26px;display:grid;gap:14px;align-content:start}
+.queue .seg{width:100%}
+.mail{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.mail code{font:500 15px var(--mono);color:var(--text);background:#070606;border:1px solid var(--line);border-radius:4px;padding:10px 14px;user-select:all}
+.links{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px}
+.clock{padding:26px;display:grid;gap:12px;align-content:space-between}
+.clock .seg{width:100%}
+footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:26px 40px;border-top:1px solid var(--line);color:var(--mute);font:400 11px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+
+@media(max-width:980px){.hero{grid-template-columns:1fr}.strip{grid-template-columns:1fr 1fr}.strip .ttl{grid-column:1/-1}.contact{grid-template-columns:1fr}}
+@media(max-width:560px){.strip{grid-template-columns:1fr}.ent{grid-template-columns:1fr;gap:6px}header nav{gap:16px}}
+@media(prefers-reduced-motion:reduce){.led{animation:none}*{transition:none!important}}
+</style>
+
+<div class="w">
+<header>
+  <a href="#top" aria-label="Arafat, home" style="text-decoration:none"><svg class="seg" data-t="ARAFAT" data-h="22" style="--c:var(--red)"></svg></a>
+  <nav aria-label="Main"><a href="#work"><span class="lbl">Work</span></a><a href="#stack"><span class="lbl">Stack</span></a><a href="#log"><span class="lbl">Log</span></a><a href="#contact"><span class="lbl">Contact</span></a></nav>
+  <div class="status"><span class="led" aria-hidden="true"></span><span class="lbl" style="--c:var(--green)">Open to work</span><button class="btn sm" id="lamp" type="button" title="Light every segment">Lamp test</button></div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div>
+    <h1 class="hl" aria-label="I build backends that ship">
+      <svg class="seg" data-t="I BUILD" aria-hidden="true"></svg>
+      <svg class="seg" data-t="BACKENDS" aria-hidden="true"></svg>
+      <svg class="seg" data-t="THAT SHIP" style="--c:var(--amber)" aria-hidden="true"></svg>
+    </h1>
+    <p class="lead">I'm Md. Arafatuzzaman, a backend and full-stack developer from Jashore, Bangladesh. I build Node.js and FastAPI APIs, real-time systems and RAG pipelines, plus Flutter apps that real people use in English and বাংলা.</p>
+    <div class="cta"><a class="btn on" href="#work">See the work <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l5 5-5 5"/></svg></a><a class="btn" href="#contact">Say hi</a></div>
+  </div>
+  <div class="totem bez" aria-label="GitHub numbers">
+    <span class="lbl" style="--c:var(--mute)">github.com/mdmakky</span>
+    <div class="row" style="--c:var(--red)"><div><span class="lbl">Contributions</span><span class="unit">last 12 months</span></div><svg class="seg cnt" data-n="797" data-w="3" data-mode="7" aria-label="797"></svg></div>
+    <div class="row" style="--c:var(--amber)"><div><span class="lbl">Repositories</span><span class="unit">public + private</span></div><svg class="seg cnt" data-n="34" data-w="3" data-mode="7" aria-label="34"></svg></div>
+    <div class="row" style="--c:var(--green)"><div><span class="lbl">Apps live</span><span class="unit">shipped + public</span></div><svg class="seg cnt" data-n="4" data-w="3" data-mode="7" aria-label="4"></svg></div>
+  </div>
+</div>
+
+<div class="strip" id="work">
+  <div class="ttl"><svg class="seg" data-t="SHIPPED" data-h="34" aria-hidden="true"></svg><p style="color:var(--mute);margin:10px 0 0;font-size:14px">Four products, live or open source. Each one is a real system, not a tutorial.</p></div>
+  <a class="mod bez" href="https://rivo-navy.vercel.app" target="_blank" rel="noopener" style="--c:var(--red)"><span class="lbl t">Rivo · Finance</span><div class="scr"><svg class="seg" data-t="-6420" style="--c:var(--red)" aria-hidden="true"></svg></div><p>Offline money tracker for cash, bank, bKash and Nagad. Type "tea 20" and it files the expense.</p><span class="lbl">Flutter · Supabase ↗</span></a>
+  <a class="mod bez" href="https://meal-bazar.vercel.app" target="_blank" rel="noopener" style="--c:var(--amber)"><span class="lbl t">Meal Bazar · Mess</span><div class="scr"><svg class="seg" data-t="30 DAY" style="--c:var(--amber)" aria-hidden="true"></svg></div><p>Runs a shared mess from one phone: meals, bazar, shared costs and the month-end hisab.</p><span class="lbl">Flutter · Supabase ↗</span></a>
+  <a class="mod bez" href="https://tongchat.app" target="_blank" rel="noopener" style="--c:var(--green)"><span class="lbl t">Tong · Chat</span><div class="scr"><svg class="seg" data-t="ONLINE" style="--c:var(--green)" aria-hidden="true"></svg></div><p>Real-time group chat with media, OTP login, presence and JWT refresh rotation.</p><span class="lbl">Socket.io · Postgres · Mongo ↗</span></a>
+  <a class="mod bez" href="https://github.com/mdmakky/Mentora-AI" target="_blank" rel="noopener" style="--c:var(--amber)"><span class="lbl t">Mentora · AI</span><div class="scr"><svg class="seg" data-t="RAG" style="--c:var(--amber)" aria-hidden="true"></svg></div><p>Study assistant that answers from your own PDFs, built on a RAG pipeline with ChromaDB.</p><span class="lbl">React · FastAPI · LangChain ↗</span></a>
+</div>
+
+<section id="stack">
+  <div class="sh"><svg class="seg" data-t="STACK" aria-label="Stack"></svg><p>What I reach for. Backend first, then whatever the product needs to reach people.</p></div>
+  <div class="keys" id="keys"></div>
+</section>
+
+<section id="log">
+  <div class="sh"><svg class="seg" data-t="LOG" aria-label="Log"></svg><p>The short version of how I got here.</p></div>
+  <div class="log" id="logs"></div>
+</section>
+
+<section id="contact">
+  <div class="contact">
+    <div class="queue bez">
+      <span class="lbl" style="--c:var(--mute)">Now serving</span>
+      <svg class="seg" data-t="YOU" style="--c:var(--green)" aria-label="You"></svg>
+      <p style="margin:0;max-width:44ch">Hiring for a Junior SWE or backend role, or need an app built? Your number is up. Write to me and I reply within a day.</p>
+      <div class="mail"><code id="em">makky.cse@gmail.com</code><button class="btn" id="copy" type="button">Copy email</button></div>
+      <div class="links"><a href="https://github.com/mdmakky" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/md-amakky" target="_blank" rel="noopener">LinkedIn</a><a href="https://facebook.com/md.arafatuzzaman.makky" target="_blank" rel="noopener">Facebook</a></div>
+    </div>
+    <div class="clock bez">
+      <span class="lbl" style="--c:var(--mute)">Local time · Jashore, BD</span>
+      <svg class="seg" id="clk" data-t="00:00" data-mode="7" style="--c:var(--red)" aria-live="off"></svg>
+      <p style="margin:0;color:var(--mute);font-size:14px">UTC+6. If it's late here, I'll answer in the morning.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><span>© 2026 Md. Arafatuzzaman</span><span>Every segment hand-drawn in SVG</span></footer>
+</div>
+
+<script>
+/* 14-segment glyph map; 7-seg mode merges ML+MR into one middle bar and hides diagonals/centre */
+var G={A:'T TR BR BL TL ML MR',B:'T TR BR B UC LC MR',C:'T TL BL B',D:'T TR BR B UC LC',E:'T TL BL B ML',F:'T TL BL ML',G:'T TL BL B BR MR',H:'TL BL TR BR ML MR',I:'T B UC LC',J:'TR BR B BL',K:'TL BL ML UR LR',L:'TL BL B',M:'TL BL TR BR UL UR',N:'TL BL TR BR UL LR',O:'T TR BR B BL TL',P:'T TR TL BL ML MR',Q:'T TR BR B BL TL LR',R:'T TR TL BL ML MR LR',S:'T TL ML MR BR B',T:'T UC LC',U:'TL BL B BR TR',V:'TL BL LL UR',W:'TL BL TR BR LL LR',X:'UL UR LL LR',Y:'UL UR LC',Z:'T UR LL B',
+'0':'T TR BR B BL TL','1':'TR BR','2':'T TR ML MR BL B','3':'T TR MR BR B','4':'TL ML MR TR BR','5':'T TL ML MR BR B','6':'T TL BL B BR ML MR','7':'T TR BR','8':'T TR BR B BL TL ML MR','9':'T TL TR ML MR BR B','-':'ML MR','.':'','+':'ML MR UC LC',',':'',' ':''};
+var x0=1.6,x1=10.4,xc=6,y0=1.6,ym=10,y1=18.4,g=.95;
+var S={T:[x0+g,y0,x1-g,y0],B:[x0+g,y1,x1-g,y1],TL:[x0,y0+g,x0,ym-g],BL:[x0,ym+g,x0,y1-g],TR:[x1,y0+g,x1,ym-g],BR:[x1,ym+g,x1,y1-g],ML:[x0+g,ym,xc-g*.6,ym],MR:[xc+g*.6,ym,x1-g,ym],UC:[xc,y0+g,xc,ym-g],LC:[xc,ym+g,xc,y1-g],UL:[x0+g+.5,y0+g+.9,xc-g,ym-g],UR:[x1-g-.5,y0+g+.9,xc+g,ym-g],LL:[xc-g,ym+g,x0+g+.5,y1-g-.9],LR:[xc+g,ym+g,x1-g-.5,y1-g-.9]};
+var K7=['T','TR','BR','B','BL','TL','M'],K14=Object.keys(S);
+function cell(ch,mode,ox){var on=(G[ch]||'').split(' '),keys=mode==7?K7:K14,s='';
+ keys.forEach(function(k){var c=k=='M'?[x0+g,ym,x1-g,ym]:S[k],lit=k=='M'?on.indexOf('ML')>-1:on.indexOf(k)>-1;
+  s+='<line class="'+(lit?'on':'off')+'" x1="'+(c[0]+ox)+'" y1="'+c[1]+'" x2="'+(c[2]+ox)+'" y2="'+c[3]+'"/>'});return s}
+function draw(svg,txt){var mode=svg.dataset.mode||14,adv=12.6,cells=[],ox=0,out='';
+ for(var i=0;i<txt.length;i++){var ch=txt[i].toUpperCase();
+  if(ch==':'){out+='<circle class="on" cx="'+(ox+2.4)+'" cy="6.5" r="1"/><circle class="on" cx="'+(ox+1.6)+'" cy="13.5" r="1"/>';ox+=5;continue}
+  if(ch=='.'||ch==','){out+='<circle class="on" cx="'+(ox-1)+'" cy="18.4" r="1"/>';continue}
+  out+=cell(ch,mode,ox);ox+=adv}
+ var w=ox+2;svg.setAttribute('viewBox','-1 0 '+(w+1)+' 20');
+ svg.innerHTML='<g transform="skewX(-7) translate(2.4 0)" stroke-width="1.55" stroke-linecap="round">'+out+'</g>';
+ if(svg.dataset.h){svg.style.height=svg.dataset.h+'px';svg.style.width='auto'}}
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.querySelectorAll('svg.seg[data-t]').forEach(function(s){draw(s,s.dataset.t)});
+
+/* counters: segments die and re-ignite stepwise, never slide */
+function pad(n,w){n=String(n);while(n.length<w)n=' '+n;return n}
+document.querySelectorAll('svg.cnt').forEach(function(s,i){var n=+s.dataset.n,w=+s.dataset.w;
+ if(reduce){draw(s,pad(n,w));return}draw(s,pad('',w));var k=0,steps=14;
+ setTimeout(function tick(){k++;draw(s,pad(k>=steps?n:Math.round(n*k/steps+Math.random()*n*.08),w));if(k<steps)setTimeout(tick,55)},400+i*220)});
+
+/* stack keys */
+var keys=[['NODE','Node.js · Express','red'],['FASTAPI','Python','red'],['DJANGO','Python','red'],['POSTGRES','PostgreSQL','amber'],['MONGO','MongoDB','amber'],['SUPABASE','Auth · DB · RLS','amber'],['SOCKET','Socket.io','green'],['FLUTTER','Android apps','green'],['REACT','Web front-end','green'],['RAG','LangChain · ChromaDB','amber'],['DOCKER','Containers','red'],['AWS','EC2 · DigitalOcean','red']];
+document.getElementById('keys').innerHTML=keys.map(function(k){return '<div class="key bez" style="--c:var(--'+k[2]+')"><svg class="seg" data-t="'+k[0]+'" aria-label="'+k[1]+'"></svg><span class="lbl">'+k[1]+'</span></div>'}).join('');
+var logs=[['2022','Started B.Sc. in CSE at JUST','Jashore University of Science and Technology.'],['2024','80-hour Machine Learning certification','Then NLP research with PyTorch, LangChain and RAG.'],['2025','INNOVATEX hackathon finalist','Also ranked 56 of 200 at Datathon KUET.'],['RECENT','Backend intern at Syftet Limited','Built and shipped REST APIs for production.'],['2026','Shipping Rivo, Meal Bazar and Tong','Graduating and open to Junior SWE / backend roles.']];
+document.getElementById('logs').innerHTML=logs.map(function(l,i){return '<div class="ent"><svg class="seg" data-t="'+l[0]+'" data-mode="'+(/^\d+$/.test(l[0])?7:14)+'" style="--c:var(--'+(i==logs.length-1?'green':'amber')+')" aria-label="'+l[0]+'"></svg><div><b>'+l[1]+'</b><span>'+l[2]+'</span></div></div>'}).join('');
+document.querySelectorAll('#keys svg.seg,#logs svg.seg').forEach(function(s){draw(s,s.dataset.t)});
+
+/* live Jashore clock with blinking colon */
+var clk=document.getElementById('clk'),blink=true;
+function time(){var t=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Dhaka',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());draw(clk,blink||reduce?t:t.replace(':',' '));blink=!blink}
+time();setInterval(time,1000);
+
+/* lamp test: light every segment for a moment, like a real panel */
+document.getElementById('lamp').onclick=function(){var offs=document.querySelectorAll('.seg .off');offs.forEach(function(l){l.setAttribute('class','on')});setTimeout(function(){offs.forEach(function(l){l.setAttribute('class','off')})},reduce?400:900)};
+
+/* copy email */
+document.getElementById('copy').onclick=function(){var b=this,em=document.getElementById('em');
+ (navigator.clipboard?navigator.clipboard.writeText(em.textContent):Promise.reject()).then(function(){b.textContent='Copied'},function(){var r=document.createRange();r.selectNodeContents(em);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press Ctrl+C'});
+ setTimeout(function(){b.textContent='Copy email'},2200)};
+</script>

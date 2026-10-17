@@ -1,0 +1,170 @@
+<title>Arafat Header Concepts</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Hind+Siliguri:wght@600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a landscape of rolling hills as the hero band, then a calm two-column reading layout: projects on the left, a sidebar on the right. Day and night themes. */
+:root{--bg:#fbfaf7;--fg:#1d2433;--soft:#4a5468;--mute:#6b7487;--accent:#d6336c;--accent2:#2f6fde;--pill:#f0eee8;--pillb:#e2dfd6;
+--sky1:#8fd0ff;--sky2:#d8f0ff;--far:#5f9e6a;--mid:#c9b79c;--near:#2d3a4a;--water1:#4aa3c9;--water2:#8fd3ec;--win:#fff3c4;--steam:#ffffffcc;--stars:0;--sun:#ffd34d;
+--spring:linear(0,.009,.035 2.1%,.141,.281 6.7%,.723 12.9%,.938 16.7%,1.017,1.077,1.121 22%,1.149 24.3%,1.159,1.163,1.161,1.154 29.9%,1.129 32.8%,1.051 39.6%,1.017 43.1%,.991,.977 51%,.974 53.8%,.975 57.1%,.997 69.8%,1.003 76.9%,1)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1015;--fg:#eef0f5;--soft:#c3c8d4;--mute:#8d94a5;--accent:#ff5c93;--accent2:#7fb0ff;--pill:#181b22;--pillb:#2a2f3a;--sky1:#0b1a2b;--sky2:#1d3a55;--far:#16283a;--mid:#1a2230;--near:#05080d;--water1:#0f2a40;--water2:#2b5574;--win:#ffd36e;--steam:#ffffff66;--stars:1;--sun:#f4f1e1;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1015;--fg:#eef0f5;--soft:#c3c8d4;--mute:#8d94a5;--accent:#ff5c93;--accent2:#7fb0ff;--pill:#181b22;--pillb:#2a2f3a;--sky1:#0b1a2b;--sky2:#1d3a55;--far:#16283a;--mid:#1a2230;--near:#05080d;--water1:#0f2a40;--water2:#2b5574;--win:#ffd36e;--steam:#ffffff66;--stars:1;--sun:#f4f1e1;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:17px/1.65 'Figtree',system-ui,sans-serif;margin:0;transition:background .4s}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent2);outline-offset:3px;border-radius:4px}
+a{color:inherit}
+.w{max-width:1080px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+
+.scene{position:relative;height:clamp(240px,30vw,340px);background:linear-gradient(var(--sky1),var(--sky2));overflow:hidden}
+.scene svg.land{position:absolute;inset:auto 0 -1px 0;width:100%;height:100%}
+.boat{animation:bob 4s ease-in-out infinite;transform-origin:700px 210px}@keyframes bob{50%{transform:translateY(-4px) rotate(-1deg)}}
+.rip{animation:rp 5s ease-in-out infinite}@keyframes rp{50%{transform:translateX(18px)}}
+.cloth>*{transform-box:fill-box;transform-origin:top;animation:sw 3s ease-in-out infinite}.cloth>*:nth-child(2){animation-delay:-1s}@keyframes sw{50%{transform:rotate(6deg)}}
+.kite{animation:kt 6s ease-in-out infinite}@keyframes kt{50%{transform:translate(-14px,10px) rotate(-6deg)}}
+.steam path{animation:st 2.4s ease-in-out infinite;opacity:.8}.steam path+path{animation-delay:-1.2s}@keyframes st{0%{transform:translateY(6px);opacity:0}40%{opacity:.9}100%{transform:translateY(-14px);opacity:0}}
+.picker{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20;display:flex;gap:6px;padding:6px;border-radius:999px;background:var(--fg);box-shadow:0 10px 30px #0004}
+.picker button{all:unset;cursor:pointer;color:var(--bg);font:600 14px 'Figtree';padding:8px 14px;border-radius:999px;white-space:nowrap}
+.picker button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.picker button:focus-visible{outline:2px solid var(--accent2)}
+.scene .stars{position:absolute;inset:0;opacity:var(--stars);transition:opacity .6s;background-image:radial-gradient(1.5px 1.5px at 12% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 12%,#fff,transparent),radial-gradient(1.5px 1.5px at 52% 26%,#fff,transparent),radial-gradient(1px 1px at 68% 10%,#fff,transparent),radial-gradient(1.5px 1.5px at 84% 22%,#fff,transparent),radial-gradient(1px 1px at 92% 8%,#fff,transparent),radial-gradient(1px 1px at 40% 34%,#fff,transparent)}
+.scene .orb{position:absolute;right:14%;top:18%;width:54px;height:54px;border-radius:50%;background:var(--sun);box-shadow:0 0 40px var(--sun);transition:background .5s,box-shadow .5s}
+nav.top{position:absolute;inset:0 0 auto;z-index:2}
+nav.top .w{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.logo{font:800 22px 'Figtree';text-decoration:none;color:#13213a;display:inline-flex;align-items:center;gap:2px}
+.logo span{color:var(--accent)}
+nav.top ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-weight:600;font-size:16px;color:#13213a}
+nav.top a{text-decoration:none}
+nav.top a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+:root[data-theme="dark"] .logo,:root[data-theme="dark"] nav.top ul{color:#e9eef8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo,:root:not([data-theme="light"]) nav.top ul{color:#e9eef8}}
+.tog{all:unset;cursor:pointer;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:inherit;transition:transform .6s var(--spring)}
+.tog:hover{transform:rotate(25deg) scale(1.1)}
+.tog svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.navr{display:flex;align-items:center;gap:18px}
+
+main{padding-block:8px 80px}
+.intro{max-width:640px;margin:-10px 0 64px}
+.intro h1{font:800 clamp(36px,5.4vw,56px)/1.08 'Figtree';letter-spacing:-.03em;margin:0 0 18px;text-wrap:balance}
+.intro h1 .bn{font-family:'Hind Siliguri';font-weight:600;color:var(--accent)}
+.intro p{color:var(--soft);font-size:19px;margin:0 0 14px;max-width:58ch}
+.wave{display:inline-block;transform-origin:70% 80%}
+.wave:hover{animation:wv .9s ease}
+@keyframes wv{20%,60%{transform:rotate(14deg)}40%,80%{transform:rotate(-8deg)}}
+.spk{position:relative;white-space:nowrap}
+.spk svg{position:absolute;width:12px;height:12px;fill:#f7b500;pointer-events:none;animation:tw .9s ease forwards}
+@keyframes tw{0%{transform:scale(0) rotate(0)}50%{transform:scale(1) rotate(90deg)}100%{transform:scale(0) rotate(180deg)}}
+
+.cols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(32px,6vw,90px)}
+h2{font:700 15px 'Figtree';letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 26px}
+.proj{margin-bottom:48px}
+.proj h3{font:700 22px/1.3 'Figtree';margin:0;letter-spacing:-.01em}
+.proj h3 a{text-decoration:none}
+.proj h3 a:hover{color:var(--accent2)}
+.proj .sub{color:var(--accent2);font-weight:500;margin:2px 0 10px;font-size:16px}
+.proj p{color:var(--soft);margin:0 0 12px;max-width:62ch}
+.proj code{font:500 .85em 'JetBrains Mono',monospace;background:var(--pill);border:1px solid var(--pillb);border-radius:5px;padding:1px 6px}
+.more{font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
+.more svg,.list svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s var(--spring)}
+.more:hover svg,.list a:hover svg{transform:translateX(5px)}
+aside section{margin-bottom:52px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills span{font-size:14px;font-weight:500;padding:4px 12px;border-radius:8px;background:var(--pill);border:1px solid var(--pillb);transition:transform .45s var(--spring)}
+.pills span:hover{transform:translateY(-3px) rotate(-2deg)}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.list a{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;text-decoration:none;font-weight:600}
+.list a svg{margin-top:5px}
+.list a:hover span{color:var(--accent2)}
+.now{background:var(--pill);border:1px solid var(--pillb);border-radius:14px;padding:18px 20px;color:var(--soft);font-size:16px}
+.now b{color:var(--fg)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;margin-right:8px;box-shadow:0 0 0 0 #22c55e88;animation:pl 2s infinite}
+@keyframes pl{70%{box-shadow:0 0 0 8px #22c55e00}100%{box-shadow:0 0 0 0 #22c55e00}}
+footer{border-top:1px solid var(--pillb);padding-block:28px 40px;color:var(--mute);font-size:15px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:800px){.cols{grid-template-columns:1fr}nav.top ul{gap:16px;font-size:15px}.scene .orb{width:38px;height:38px}}
+@media(max-width:480px){nav.top ul li.hide{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="scene" aria-hidden="false">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="orb" aria-hidden="true"></div>
+  <svg class="land sc" data-k="river" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path fill="var(--far)" d="M0 150c40-14 60-30 90-22 20-30 50-24 70-6 30-26 70-22 90 2 40-18 80-10 110 6 30-30 80-26 100 0 50-16 90-6 130 4 30-24 70-20 100 2 40-14 90-12 130 6 30-22 80-18 110 4 50-12 100-4 140 4 40-20 90-14 120 4 30-10 50-8 60-6V176H0Z"/>
+    <rect y="168" width="1440" height="92" fill="var(--water1)"/>
+    <g stroke="var(--water2)" stroke-width="3" stroke-linecap="round" class="rip"><path d="M120 196h80M380 214h120M760 192h70M1040 220h110M1260 200h60M560 236h90"/></g>
+    <g class="boat"><path fill="var(--near)" d="M560 206c60 14 200 14 280 0-10 18-40 28-140 28s-130-10-140-28z"/><path fill="var(--near)" d="M640 206c0-26 20-40 60-40s60 14 60 40z"/><path stroke="var(--near)" stroke-width="4" d="M820 210l40-70"/></g>
+    <rect y="252" width="1440" height="8" fill="var(--bg)"/>
+  </svg>
+  <svg class="land sc" data-k="roof" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true" hidden>
+    <g fill="var(--far)"><rect x="20" y="110" width="120" height="150"/><rect x="160" y="80" width="90" height="180"/><rect x="270" y="130" width="140" height="130"/><rect x="900" y="90" width="110" height="170"/><rect x="1030" y="120" width="150" height="140"/><rect x="1200" y="70" width="100" height="190"/><rect x="1320" y="115" width="120" height="145"/></g>
+    <g fill="var(--win)"><rect x="50" y="140" width="14" height="18"/><rect x="96" y="176" width="14" height="18"/><rect x="190" y="110" width="14" height="18"/><rect x="300" y="160" width="14" height="18"/><rect x="930" y="120" width="14" height="18"/><rect x="1070" y="150" width="14" height="18"/><rect x="1230" y="100" width="14" height="18"/><rect x="1350" y="150" width="14" height="18"/></g>
+    <rect x="0" y="200" width="1440" height="60" fill="var(--mid)"/><rect x="0" y="196" width="1440" height="8" fill="var(--near)"/>
+    <g fill="var(--near)"><rect x="470" y="128" width="70" height="72" rx="10"/><rect x="480" y="120" width="50" height="12" rx="4"/><rect x="478" y="200" width="8" height="0"/></g>
+    <path d="M600 120Q740 150 880 118" stroke="var(--near)" stroke-width="2" fill="none"/>
+    <g class="cloth"><rect x="640" y="130" width="34" height="44" rx="3" fill="#e5484d"/><rect x="710" y="136" width="40" height="30" rx="3" fill="#f5c542"/><path d="M790 134h44l-6 46h-32z" fill="#3e9fe0"/></g>
+    <g class="kite"><path d="M1110 30l26 30-26 30-26-30z" fill="var(--accent)"/><path d="M1110 90q-30 60-160 110" stroke="var(--near)" stroke-width="1.2" fill="none"/></g>
+    <rect y="252" width="1440" height="8" fill="var(--bg)"/>
+  </svg>
+  <svg class="land sc" data-k="desk" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true" hidden>
+    <rect x="980" y="30" width="220" height="150" rx="6" fill="var(--sky2)" stroke="var(--near)" stroke-width="8"/><path d="M1090 30v150M980 105h220" stroke="var(--near)" stroke-width="6"/>
+    <rect x="0" y="206" width="1440" height="54" fill="var(--mid)"/><rect x="0" y="200" width="1440" height="10" fill="var(--near)"/>
+    <g><rect x="470" y="70" width="230" height="130" rx="10" fill="var(--near)"/><rect x="482" y="82" width="206" height="106" rx="4" fill="#0f1420"/>
+      <g stroke-linecap="round" stroke-width="5"><path d="M500 104h60" stroke="#ff5c93"/><path d="M570 104h70" stroke="#7fb0ff"/><path d="M516 124h90" stroke="#9fd88a"/><path d="M516 144h50" stroke="#f5c542"/><path d="M576 144h60" stroke="#7fb0ff"/><path d="M500 164h40" stroke="#ff5c93"/></g>
+      <path d="M440 200h290l-16-8H456z" fill="var(--near)"/></g>
+    <g><path d="M800 140h44l-6 60h-32z" fill="#c9852d" opacity=".9"/><path d="M800 140h44" stroke="var(--near)" stroke-width="3"/>
+      <g class="steam" stroke="var(--steam)" stroke-width="3" fill="none" stroke-linecap="round"><path d="M812 128c-8-12 8-18 0-30"/><path d="M830 128c-8-12 8-18 0-30"/></g></g>
+    <rect y="252" width="1440" height="8" fill="var(--bg)"/>
+  </svg>
+  <nav class="top" aria-label="Main"><div class="w">
+    <a class="logo" href="#top">arafat<span>.</span></a>
+    <div class="navr"><ul><li><a href="#work">Work</a></li><li class="hide"><a href="#stack">Stack</a></li><li><a href="#contact">Contact</a></li></ul>
+    <button class="tog" id="tog" type="button" aria-label="Switch light and dark theme"><svg viewBox="0 0 24 24" id="ico"></svg></button></div>
+  </div></nav>
+</div>
+
+<main class="w" id="top">
+  <div class="intro">
+    <h1>Hey, I'm Arafat <span class="wave" aria-hidden="true">✌︎</span><br>I build <span class="spk" id="spk">backends that ship</span>.</h1>
+    <p>I'm a backend and full-stack developer from Jashore, Bangladesh. I like turning everyday problems into small, reliable apps: tracking money, splitting a mess's bazar, chatting in real time, studying smarter. Most of them speak English and <span class="bn" style="font-family:'Hind Siliguri';color:var(--accent);font-weight:600">বাংলা</span>.</p>
+  </div>
+
+  <div class="cols">
+    <div id="work">
+      <h2>Things I've built</h2>
+      <article class="proj"><h3><a href="https://rivo-navy.vercel.app" target="_blank" rel="noopener">Rivo</a></h3><p class="sub">Know where your money went</p><p>An offline money tracker for cash, bank, bKash and Nagad. Type <code>tea 20</code> and it files a food expense for ৳20. Works in English and Bangla.</p><a class="more" href="https://rivo-navy.vercel.app" target="_blank" rel="noopener">See it live <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+      <article class="proj"><h3><a href="https://meal-bazar.vercel.app" target="_blank" rel="noopener">Meal Bazar</a></h3><p class="sub">Run your whole mess from one phone</p><p>Meals, bazar, shared expenses and the month-end hisab, all settled automatically. Built with Flutter and Supabase for the shared houses students actually live in.</p><a class="more" href="https://meal-bazar.vercel.app" target="_blank" rel="noopener">See it live <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+      <article class="proj"><h3><a href="https://tongchat.app" target="_blank" rel="noopener">Tong</a></h3><p class="sub">Real-time chat, built from the socket up</p><p>Group chats, media sharing, OTP login and presence. Event-driven with Socket.io rooms, PostgreSQL plus MongoDB, and JWT refresh-token rotation.</p><a class="more" href="https://tongchat.app" target="_blank" rel="noopener">See it live <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+      <article class="proj"><h3><a href="https://github.com/mdmakky/Mentora-AI" target="_blank" rel="noopener">Mentora AI</a></h3><p class="sub">A study buddy that reads your PDFs</p><p>Upload your notes and ask questions. A RAG pipeline with FastAPI, LangChain and ChromaDB answers from your own material, with a React front-end.</p><a class="more" href="https://github.com/mdmakky/Mentora-AI" target="_blank" rel="noopener">Read the code <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+      <article class="proj"><h3><a href="https://share-reads.web.app" target="_blank" rel="noopener">Share-Reads</a></h3><p class="sub">Borrow books from people nearby</p><p>A team project for uploading, lending and reviewing books, with Node.js, MongoDB and Firebase.</p><a class="more" href="https://share-reads.web.app" target="_blank" rel="noopener">See it live <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+    </div>
+
+    <aside>
+      <section><h2>Right now</h2><div class="now"><span class="dot" aria-hidden="true"></span><b>Open to work.</b> Looking for Junior SWE and backend roles, and happy to take on freelance app builds. Recently a backend intern at Syftet Limited.</div></section>
+      <section id="stack"><h2>What I use</h2><div class="pills"><span>Node.js</span><span>Express</span><span>FastAPI</span><span>Django</span><span>PostgreSQL</span><span>MongoDB</span><span>Supabase</span><span>Socket.io</span><span>Flutter</span><span>React</span><span>LangChain</span><span>Docker</span><span>AWS</span></div></section>
+      <section><h2>Along the way</h2><ul class="list">
+        <li><a href="#top"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>B.Sc. CSE at JUST, Jashore</span></a></li>
+        <li><a href="#top"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>INNOVATEX 2025 hackathon finalist</span></a></li>
+        <li><a href="#top"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>Datathon KUET, 56 of 200</span></a></li>
+        <li><a href="#top"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>80-hour Machine Learning certification</span></a></li>
+      </ul></section>
+      <section id="contact"><h2>Say hello</h2><ul class="list">
+        <li><a href="mailto:makky.cse@gmail.com"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>makky.cse@gmail.com</span></a></li>
+        <li><a href="https://www.linkedin.com/in/md-amakky" target="_blank" rel="noopener"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>LinkedIn</span></a></li>
+        <li><a href="https://github.com/mdmakky" target="_blank" rel="noopener"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span>GitHub</span></a></li>
+      </ul></section>
+    </aside>
+  </div>
+</main>
+<div class="picker" role="group" aria-label="Header concept"><button data-k="river" aria-pressed="true">নদী · River</button><button data-k="roof">ছাদ · Rooftop</button><button data-k="desk">চা · Desk</button></div>
+<footer class="w"><span>© 2026 Md. Arafatuzzaman</span><span>Made in Jashore with a lot of cha</span></footer>
+
+<script>
+var root=document.documentElement,ico=document.getElementById('ico');
+var SUN='<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',MOON='<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>';
+function dark(){var t=root.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme:dark)').matches}
+function paint(){ico.innerHTML=dark()?SUN:MOON}
+paint();
+document.getElementById('tog').onclick=function(){root.setAttribute('data-theme',dark()?'light':'dark');paint()};
+document.querySelectorAll('.picker button').forEach(function(b){b.onclick=function(){document.querySelectorAll('.picker button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});document.querySelectorAll('.sc').forEach(function(sv){sv.toggleAttribute('hidden',sv.dataset.k!==b.dataset.k)})}});
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,spk=document.getElementById('spk');
+if(!reduce)setInterval(function(){var s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 160 160');s.innerHTML='<path d="M80 0C80 0 84 70 160 80 84 90 80 160 80 160S76 90 0 80C76 70 80 0 80 0Z"/>';s.style.left=Math.random()*100+'%';s.style.top=(Math.random()*90-20)+'%';var z=8+Math.random()*10;s.style.width=s.style.height=z+'px';spk.appendChild(s);setTimeout(function(){s.remove()},900)},450);
+</script>

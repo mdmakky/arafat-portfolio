@@ -1,0 +1,63 @@
+{
+  "title": "Arafat-er portfolio: design world choose koro",
+  "question": "Roll e eshechhe 'Tong Cha-Dokan'. Eta rakho, ekta alternate nao, ba re-roll koro.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Tong Cha-Dokan",
+      "kicker": "THE ROLL",
+      "lineage": "Hand-painted tin signboards of Bangladeshi tea stalls",
+      "thesis": "The portfolio is your tong: a friendly tea stall where every project hangs on the menu board.",
+      "palette": ["#1f7a8c", "#e63b2e", "#f6c445", "#fdfaf0", "#16181d", "#b5651d"],
+      "materials": ["enamel paint on tin", "hand-lettered Bangla + English", "glass of milk tea", "wooden bench"],
+      "viewport": "A painted teal tin signboard reading 'Arafat's Tong' with the menu board listing Rivo, Meal Bazar, Tong and Mentora; a steaming cha glass is the contact button.",
+      "risk": "Can tip into kitsch if the lettering is clip-art rather than confidently hand-painted."
+    },
+    {
+      "id": "challenger-neubrutal",
+      "label": "Grid Brutal",
+      "lineage": "Award-grade neubrutalist product sites",
+      "thesis": "Bold color blocks, thick black outlines, buttons that physically press into their shadow.",
+      "palette": ["#ffc93c", "#ff5fa2", "#2f6bff", "#b6f04a", "#fbfaf6", "#000000"],
+      "materials": ["solid fills", "hard offset shadows", "chunky grotesk"],
+      "viewport": "A grid of outlined project blocks under a huge name, every card clickable with a snap-press.",
+      "risk": "Very popular style right now; needs Bangla touches to feel like you.",
+      "case": "Fuses cleanly: playful like Josh, and a recruiter can scan the grid in seconds.",
+      "hero": "https://impeccable.style/worlds/cards/neubrutalist-award-grade-hero.webp"
+    },
+    {
+      "id": "challenger-stepseq",
+      "label": "Step Sequencer",
+      "lineage": "Early-80s drum machine step row",
+      "thesis": "Your skills and projects are 16 candy step keys; press run and the chase light plays your career.",
+      "palette": ["#26272b", "#e8412c", "#f28c28", "#f4d03f", "#f2f2ee"],
+      "materials": ["charcoal panel", "lit LED keys", "silkscreen labels", "segmented readout"],
+      "viewport": "A machine panel with name as the model badge; 16 step keys, each a project or skill, light up in sequence.",
+      "risk": "Fun and memorable, but recruiters must still find plain project details fast.",
+      "case": "Fuses well: playful toy-like interaction; the GitHub contribution rhythm maps to the step row.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-drum-machine-step-row-hero.webp"
+    },
+    {
+      "id": "challenger-orienteering",
+      "label": "Course Map",
+      "lineage": "Orienteering map and legend",
+      "thesis": "Your journey as a course: numbered purple controls from JUST to Syftet to shipped apps.",
+      "palette": ["#ffffff", "#f7d24a", "#8bbf5c", "#a0632d", "#3b8fd9", "#a43ca8"],
+      "materials": ["contour texture", "purple course line", "control circles", "legend table"],
+      "viewport": "A contour map ground with a purple course linking control points, each a milestone or project.",
+      "risk": "Less 'playful' in Josh's sense; more clever and calm.",
+      "case": "Fuses fairly: the journey story fits, but the playful feel you liked is weaker.",
+      "hero": "https://impeccable.style/worlds/cards/notation-diagram-systems-orienteering-map-hero.webp"
+    }
+  ],
+  "reroll": true,
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A clean developer portfolio done at full craft: hero, projects grid, about, contact.",
+    "palette": ["#ffffff", "#111111", "#4f6bff"],
+    "viewport": "Name and role headline, a project card grid, then about and contact.",
+    "risk": "Safe and familiar; this is the genre you called generic."
+  },
+  "steer": true
+}
