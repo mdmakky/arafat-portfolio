@@ -12,7 +12,7 @@ import GitHub from '../components/GitHub.astro';
   <DeskScene />
   <main class="w" id="top">
     <div class="intro">
-      <h1>Hey, I'm Arafat.<br />I build backends that ship.</h1>
+      <h1>Hey, I'm Arafat.<br />I build backends <span class="nw">that ship.</span></h1>
       <p>I'm a backend and full-stack developer from Jashore, Bangladesh. I like turning everyday problems into small, reliable apps: tracking money, splitting a mess's bazar, chatting in real time, studying smarter. Most of them speak English and <span class="bn" lang="bn">বাংলা</span>.</p>
     </div>
     <div class="cols">
@@ -29,6 +29,7 @@ import GitHub from '../components/GitHub.astro';
   .intro { max-width: 640px; margin: 8px 0 64px; }
   h1 { font: 800 clamp(36px, 5.4vw, 56px)/1.08 var(--sans); letter-spacing: -.03em; margin: 0 0 18px; text-wrap: balance; }
   .intro p { color: var(--soft); font-size: 19px; margin: 0; max-width: 58ch; }
+  .nw { white-space: nowrap; }
   .bn { font-family: var(--bangla); font-weight: 600; color: var(--accent); }
   footer { width: min(1040px, 100% - 40px); margin-inline: auto; border-top: 1px solid var(--pillb); padding-block: 28px 40px; color: var(--mute); font-size: 15px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   .cols { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 90px); }
