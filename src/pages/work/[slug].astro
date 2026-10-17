@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+import { projects, type Project } from '../../data/site';
+
+export function getStaticPaths() {
+  return projects.filter((p) => p.slug).map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props as { p: Project };
+const arrow = '<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+---
+<Base title={`${p.name} · Arafat`} description={`${p.name}: ${p.tagline}. A project by Md. Arafatuzzaman.`}>
+  <header class="w bar">
+    <a class="back" href="/#work"><svg class="arrow flip" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>arafat<span>.</span></a>
+    <ThemeToggle />
+  </header>
+
+  <main class="w">
+    <h1>{p.name}</h1>
+    <p class="tag">{p.tagline}</p>
+    <div class="links">
+      <a class="btn" href={p.url} target="_blank" rel="noopener">{p.cta} <Fragment set:html={arrow} /></a>
+      {p.repo && p.repo !== p.url && <a class="btn ghost" href={p.repo} target="_blank" rel="noopener">Source code <Fragment set:html={arrow} /></a>}
+    </div>
+
+    {p.image && <img class="shot" src={p.image} alt={`${p.name} landing page`} width="1280" height="800" />}
+
+    <div class="grid">
+      <div>
+        <section><h2>The problem</h2><p>{p.problem}</p></section>
+        <section><h2>What I built</h2><ul>{p.built?.map((b) => <li>{b}</li>)}</ul></section>
+        <section><h2>How it works</h2><ul>{p.decisions?.map((d) => <li>{d}</li>)}</ul></section>
+      </div>
+      <aside>
+        <h2>Stack</h2>
+        <ul class="pills">{p.stack?.map((s) => <li>{s}</li>)}</ul>
+      </aside>
+    </div>
+  </main>
+  <footer class="w"><a href="/#work">← All projects</a><span>© 2026 Md. Arafatuzzaman</span></footer>
+</Base>
+
+<style>
+  .bar { display: flex; justify-content: space-between; align-items: center; padding-block: 22px; }
+  .back { display: inline-flex; align-items: center; gap: 8px; font: 800 22px var(--sans); text-decoration: none; }
+  .back span { color: var(--accent); }
+  .flip { transform: scaleX(-1); }
+  .back:hover .flip { transform: scaleX(-1) translateX(5px); }
+  main { padding-block: clamp(32px, 6vw, 72px) 80px; }
+  h1 { font: 800 clamp(40px, 6vw, 64px)/1.05 var(--sans); letter-spacing: -.03em; margin: 0; }
+  .tag { color: var(--accent2); font-size: clamp(19px, 2vw, 22px); font-weight: 500; margin: 8px 0 24px; }
+  .links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 10px; background: var(--fg); color: var(--bg); text-decoration: none; font-weight: 700; font-size: 15px; transition: transform .5s var(--spring); }
+  .btn:hover { transform: translateY(-2px); }
+  .ghost { background: var(--pill); color: var(--fg); border: 1px solid var(--pillb); }
+  .shot { display: block; width: 100%; height: auto; margin-top: 40px; border-radius: 14px; border: 1px solid var(--pillb); box-shadow: 0 2px 4px #0000000d, 0 18px 40px -12px #00000040; }
+  .grid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 90px); margin-top: 56px; }
+  section { margin-bottom: 44px; }
+  section p, section li { color: var(--soft); max-width: 64ch; }
+  section p { margin: 0; }
+  ul { margin: 0; padding-left: 20px; display: grid; gap: 10px; }
+  li::marker { color: var(--accent); }
+  .pills { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pills li { font-size: 14px; font-weight: 500; padding: 4px 12px; border-radius: 8px; background: var(--pill); border: 1px solid var(--pillb); color: var(--fg); }
+  footer { border-top: 1px solid var(--pillb); padding-block: 28px 40px; color: var(--mute); font-size: 15px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  footer a { color: var(--fg); font-weight: 600; text-decoration: none; }
+  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+</style>
