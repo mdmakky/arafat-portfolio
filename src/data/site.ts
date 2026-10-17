@@ -48,6 +48,7 @@ export const projects: Project[] = [
     url: 'https://meal-bazar.vercel.app',
     cta: 'See it live',
     repo: 'https://github.com/mdmakky/meal_bazar',
+    image: '/work/meal-bazar.webp',
     problem: 'A mess is shared bachelor housing, common among students in Bangladesh. Members eat together, take turns buying bazar and split rent and bills. Most messes still track this in a notebook, and the month-end calculation causes arguments.',
     built: [
       'A meal grid for every member, with half meals, guest meals and meal-off before a deadline the manager sets.',
