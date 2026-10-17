@@ -21,6 +21,7 @@
   const flip = () => {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
+    document.getElementById('tc')?.setAttribute('content', next === 'dark' ? '#141b28' : '#e4ecf4');
     try { localStorage.setItem('theme', next); } catch {}
   };
   document.querySelectorAll('[data-flip]').forEach((el) => {

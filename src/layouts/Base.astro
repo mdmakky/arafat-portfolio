@@ -19,7 +19,7 @@ const { title, description } = Astro.props;
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
     <meta property="og:image" content={new URL('/og.png', Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#e4ecf4" />
+    <meta name="theme-color" id="tc" content="#e4ecf4" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Hind+Siliguri:wght@600&family=JetBrains+Mono:wght@500&display=swap" />
@@ -30,6 +30,7 @@ const { title, description } = Astro.props;
         try { t = localStorage.getItem('theme'); } catch (e) {}
         if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', t);
+        if (t === 'dark') document.getElementById('tc').setAttribute('content', '#141b28');
       })();
     </script>
   </head>
@@ -39,7 +40,7 @@ THESIS: A developer's desk at home in Bangladesh (laptop, cha, khata, lamp, wind
 OWN-WORLD: Soft wall blue by day, ink night; warm wood desk; Figtree with Hind Siliguri for বাংলা; pink headings, blue links, pill tags, spring-eased hovers.
 STORY: Visitor sees the desk, reads "I build backends that ship", scans shipped projects, sees he is open to work, then emails.
 FIRST VIEWPORT: Full-width illustrated desk scene with nav on top; intro headline and paragraph below; projects + sidebar start just under.
-FORM: User-chosen desk concept after Scoreboard and hills rounds; seed key 0f92213c.
+FORM: seed 0f92213c rolled Ludo; user chose Scoreboard, then rejected it; user then chose Desk from three hand-made header concepts.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
     -->
     <slot />
